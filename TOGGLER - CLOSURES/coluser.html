@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Create a function called toggler using closures -->
+   <h1 id="header"></h1>
+   <button id="click">click me</button>
+    
+</body>
+</html>
+
+  
+<script>
+    
+    const makeapicall =()=>{
+      console.log('api call in progess')
+  }
+  let c =0
+
+   const debouncer = (func,delay)=>{
+    //    should remember if call is called
+    let debouncing;
+    return function (){
+        console.log(c++)
+        debouncing && clearTimeout(debouncing);
+       debouncing= setTimeout (()=>func.apply(this,arguments))
+    }
+   }
+    window.addEventListener('load',function(){
+        var btn = document.getElementById('click')
+        
+        btn.addEventListener('click',debouncer(makeapicall,1000))
+    })
+
+
+
+ function toggler(){
+     var arr = arguments
+     let index = -1
+     return function (){
+         index = index+1
+         return arr[index]
+     }
+ }
+ const toggle = toggler(1,2,3)
+ console.log(toggle())
+ console.log(toggle())
+
+ const toggle1 = toggle('on','off')
+ console.log(toggle1())
+//  console.log(toggle1())
+
+
+
+</script>
